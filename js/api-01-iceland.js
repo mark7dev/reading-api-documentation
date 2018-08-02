@@ -13,23 +13,32 @@ request.get('https://apis.is/hospital')
 
 
 //========================================================================
-// (2) How many **arrival** flights are scheduled for today?
+// (2) What is the next concert event in Iceland?
 const answerElement_iceland_2 = document.getElementById('iceland-2')
 
-var API_URL2 = 'https://docs.apis.is/flight?language=en&type=departures'
+var API_URL2 = 'http://apis.is/concerts'
+
 request
 .get(API_URL2)
-.then(function(respose) {
-  console.log(response);
+.then(function(response) {
+  var concert = response.body.results;
+  answerElement_iceland_2.textContent = concert[0].eventDateName;
 })
 
 
 
 //========================================================================
-// (3) What is the next concert event in Iceland?
+// (3) How many **arrival** flights are scheduled for today?
 const answerElement_iceland_3 = document.getElementById('iceland-3')
 
+var API_URL3 = 'https://apis.is/flight?language=en&type=departures'
 
+request
+.get(API_URL3)
+.then(function(response) {
+  var flights = response.body.results;
+  answerElement_iceland_3.textContent = flights.length;
+})
 
 
 //
